@@ -352,7 +352,8 @@ select {
     font-size: 0.96rem;
 }
 
-.insights-layout {
+.insights-layout,
+.layout-grid {
     display: grid;
     grid-template-columns: 1.5fr 0.9fr;
     gap: 22px;
@@ -360,6 +361,32 @@ select {
 
 .panel-card {
     padding: 24px;
+}
+
+.study-plan-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.study-plan-card {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #ffffff;
+}
+
+.study-plan-card h3 {
+    margin: 0 0 10px;
+    font-size: 1.05rem;
+}
+
+.study-plan-card p {
+    margin: 0 0 8px;
+}
+
+.study-plan-card .priority-tag {
+    margin-top: 10px;
 }
 
 .priority-board {
@@ -445,6 +472,10 @@ select {
 
 .analytics-card p {
     margin: 0;
+}
+
+.quick-task-panel .task-form {
+    max-width: none;
 }
 
 .task-layout {
@@ -621,6 +652,8 @@ select {
     .task-layout,
     .dashboard-overview,
     .insights-layout,
+    .layout-grid,
+    .study-plan-grid,
     .priority-board,
     .deadline-grid,
     .chart-grid,

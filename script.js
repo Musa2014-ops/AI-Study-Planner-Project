@@ -1,24 +1,28 @@
 const tasks = [
     {
         title: "Complete Math Assignment 1",
+        subject: "Math",
         hours: 3,
         priority: "Urgent",
         due: "2026-03-28"
     },
     {
         title: "Revise Physics Midterm Topics",
+        subject: "Physics",
         hours: 4,
         priority: "High",
         due: "2026-04-02"
     },
     {
         title: "Prepare Computer Science Slides",
+        subject: "Computer Science",
         hours: 2.5,
         priority: "Medium",
         due: "2026-04-04"
     },
     {
         title: "Review Lecture Notes",
+        subject: "History",
         hours: 1.5,
         priority: "Low",
         due: "2026-04-06"
@@ -70,6 +74,21 @@ function renderTaskCards() {
     `).join("");
 }
 
+function renderStudyPlan() {
+    const studyPlanGrid = document.getElementById("study-plan-grid");
+    const orderedTasks = [...tasks].sort((a, b) => new Date(a.due) - new Date(b.due));
+
+    studyPlanGrid.innerHTML = orderedTasks.map((task) => `
+        <article class="study-plan-card">
+            <p class="card-label">Recommended Task</p>
+            <h3>${task.title}</h3>
+            <p class="task-meta">Subject: ${task.subject}</p>
+            <p class="task-meta">Recommended study time: ${formatHours(task.hours)}</p>
+            <span class="priority-tag">${task.priority}</span>
+        </article>
+    `).join("");
+}
+
 function updateAnalytics() {
     const totalHours = tasks.reduce((sum, task) => sum + task.hours, 0);
     const averageHours = totalHours / tasks.length;
@@ -90,12 +109,13 @@ function addTask(event) {
     const due = document.getElementById("task-date").value;
     const priority = document.getElementById("task-priority").value;
     const hours = Number(document.getElementById("task-hours").value);
+    const subject = title.includes("Math") ? "Math" : title.includes("Physics") ? "Physics" : "General Study";
 
     if (!title || !due || !hours) {
         return;
     }
 
-    tasks.unshift({ title, due, priority, hours });
+    tasks.unshift({ title, subject, due, priority, hours });
 
     renderDashboard();
     form.reset();
@@ -104,6 +124,7 @@ function addTask(event) {
 }
 
 function renderDashboard() {
+    renderStudyPlan();
     renderPriorities();
     renderTaskCards();
     updateAnalytics();

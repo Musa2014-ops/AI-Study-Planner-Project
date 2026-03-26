@@ -40,7 +40,7 @@
             <main class="dashboard">
                 <section class="hero" id="dashboard">
                     <div class="hero-copy">
-                        <p class="eyebrow">Prototype 2 Dashboard</p>
+                        <p class="eyebrow">Prototype 3 Dashboard</p>
                         <h1>Welcome to StudyBuddy</h1>
                         <p>Your study plan now surfaces early AI-inspired priorities and clearer progress insights.</p>
                     </div>
@@ -54,14 +54,14 @@
                     <article class="overview-card spotlight-card">
                         <p class="card-label">Dashboard Focus</p>
                         <h2>Today&apos;s plan is organized around your next deadlines.</h2>
-                        <p>Prototype 2 keeps the dashboard simple while simulating AI support through grouped study priorities and quick analytics.</p>
+                        <p>Prototype 3 adds a daily AI generated study plan and a cleaner dashboard structure for faster scanning.</p>
                     </article>
 
                     <div class="overview-card-grid">
                         <article class="overview-card mini-stat-card">
-                            <p class="card-label">Priority Queue</p>
+                            <p class="card-label">Today&apos;s Tasks</p>
                             <strong id="priority-count">4</strong>
-                            <span>Tasks in the AI review list</span>
+                            <span>Tasks in your recommended plan</span>
                         </article>
 
                         <article class="overview-card mini-stat-card">
@@ -72,51 +72,22 @@
                     </div>
                 </section>
 
-                <section class="content-section" id="calendar">
-                    <div class="section-heading">
-                        <h2>Upcoming Deadlines</h2>
-                        <span class="section-caption">Your next academic checkpoints</span>
-                    </div>
-                    <div class="deadline-grid">
-                        <article class="deadline-card">
-                            <div class="icon-badge">DL</div>
-                            <h3>Assignment 1</h3>
-                            <p>Due in 2 days</p>
-                            <strong>Subject: Math</strong>
-                        </article>
-
-                        <article class="deadline-card">
-                            <div class="icon-badge">EX</div>
-                            <h3>Midterm Exam</h3>
-                            <p>Next week</p>
-                            <strong>Subject: Physics</strong>
-                        </article>
-
-                        <article class="deadline-card">
-                            <div class="icon-badge">PR</div>
-                            <h3>Project Submission</h3>
-                            <p>Due in 1 week</p>
-                            <strong>Subject: Computer Science</strong>
-                        </article>
-                    </div>
-                </section>
-
-                <section class="content-section insights-layout">
-                    <section class="panel-card ai-priorities-panel" id="ai-priorities">
+                <section class="content-section layout-grid">
+                    <section class="panel-card study-plan-panel" id="daily-plan">
                         <div class="section-heading compact-heading">
                             <div>
-                                <p class="card-label">AI-Generated Study Priorities</p>
-                                <h2>Priority by urgency</h2>
+                                <p class="card-label">Today&apos;s Study Plan</p>
+                                <h2>AI generated daily schedule</h2>
                             </div>
-                            <a class="secondary-button" href="#add-task">Add Task</a>
+                            <span class="section-caption">Recommended order based on nearest deadlines</span>
                         </div>
-                        <div class="priority-board" id="priority-board"></div>
+                        <div class="study-plan-grid" id="study-plan-grid"></div>
                     </section>
 
                     <section class="panel-card analytics-panel" id="study-analytics">
                         <div class="section-heading compact-heading">
                             <div>
-                                <p class="card-label">Study Hours Analytics</p>
+                                <p class="card-label">Study Progress Summary</p>
                                 <h2>Simple study insights</h2>
                             </div>
                         </div>
@@ -132,6 +103,50 @@
                                 <span>Estimated time per task</span>
                             </article>
                         </div>
+                    </section>
+                </section>
+
+                <section class="content-section layout-grid">
+                    <section class="panel-card deadlines-panel" id="calendar">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">Upcoming Deadlines</p>
+                                <h2>Your next academic checkpoints</h2>
+                            </div>
+                        </div>
+                        <div class="deadline-grid">
+                            <article class="deadline-card">
+                                <div class="icon-badge">DL</div>
+                                <h3>Assignment 1</h3>
+                                <p>Due in 2 days</p>
+                                <strong>Subject: Math</strong>
+                            </article>
+
+                            <article class="deadline-card">
+                                <div class="icon-badge">EX</div>
+                                <h3>Midterm Exam</h3>
+                                <p>Next week</p>
+                                <strong>Subject: Physics</strong>
+                            </article>
+
+                            <article class="deadline-card">
+                                <div class="icon-badge">PR</div>
+                                <h3>Project Submission</h3>
+                                <p>Due in 1 week</p>
+                                <strong>Subject: Computer Science</strong>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="panel-card ai-priorities-panel" id="ai-priorities">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">AI-Generated Study Priorities</p>
+                                <h2>Priority by urgency</h2>
+                            </div>
+                            <a class="secondary-button" href="#add-task">Add Task</a>
+                        </div>
+                        <div class="priority-board" id="priority-board"></div>
                     </section>
                 </section>
 
@@ -154,10 +169,10 @@
                     </div>
                 </section>
 
-                <section class="content-section" id="add-task">
+                <section class="content-section quick-task-panel" id="add-task">
                     <div class="section-heading">
-                        <h2>Create Study Task</h2>
-                        <span class="section-caption">Add a task and place it into the simulated AI priority flow</span>
+                        <h2>Quick Task Creation</h2>
+                        <span class="section-caption">Add a task and place it into the daily plan and priority flow</span>
                     </div>
 
                     <form class="task-form" id="task-form">
