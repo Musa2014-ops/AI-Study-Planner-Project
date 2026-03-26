@@ -39,13 +39,44 @@
 
             <main class="dashboard">
                 <section class="hero" id="dashboard">
-                    <h1>Welcome to StudyBuddy</h1>
-                    <p>Your AI-powered study planner.</p>
-                    <a class="primary-button" href="#add-task">Get Started</a>
+                    <div class="hero-copy">
+                        <p class="eyebrow">Prototype 2 Dashboard</p>
+                        <h1>Welcome to StudyBuddy</h1>
+                        <p>Your study plan now surfaces early AI-inspired priorities and clearer progress insights.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <a class="primary-button" href="#ai-priorities">View Priorities</a>
+                        <a class="ghost-button" href="#add-task">Create Task</a>
+                    </div>
+                </section>
+
+                <section class="dashboard-overview content-section">
+                    <article class="overview-card spotlight-card">
+                        <p class="card-label">Dashboard Focus</p>
+                        <h2>Today&apos;s plan is organized around your next deadlines.</h2>
+                        <p>Prototype 2 keeps the dashboard simple while simulating AI support through grouped study priorities and quick analytics.</p>
+                    </article>
+
+                    <div class="overview-card-grid">
+                        <article class="overview-card mini-stat-card">
+                            <p class="card-label">Priority Queue</p>
+                            <strong id="priority-count">4</strong>
+                            <span>Tasks in the AI review list</span>
+                        </article>
+
+                        <article class="overview-card mini-stat-card">
+                            <p class="card-label">Hours Planned</p>
+                            <strong id="planned-hours">11.0 hrs</strong>
+                            <span>Estimated study time this week</span>
+                        </article>
+                    </div>
                 </section>
 
                 <section class="content-section" id="calendar">
-                    <h2>Upcoming Deadlines</h2>
+                    <div class="section-heading">
+                        <h2>Upcoming Deadlines</h2>
+                        <span class="section-caption">Your next academic checkpoints</span>
+                    </div>
                     <div class="deadline-grid">
                         <article class="deadline-card">
                             <div class="icon-badge">DL</div>
@@ -70,61 +101,90 @@
                     </div>
                 </section>
 
-                <section class="content-section task-section">
+                <section class="content-section insights-layout">
+                    <section class="panel-card ai-priorities-panel" id="ai-priorities">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">AI-Generated Study Priorities</p>
+                                <h2>Priority by urgency</h2>
+                            </div>
+                            <a class="secondary-button" href="#add-task">Add Task</a>
+                        </div>
+                        <div class="priority-board" id="priority-board"></div>
+                    </section>
+
+                    <section class="panel-card analytics-panel" id="study-analytics">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">Study Hours Analytics</p>
+                                <h2>Simple study insights</h2>
+                            </div>
+                        </div>
+                        <div class="analytics-grid">
+                            <article class="analytics-card">
+                                <p>Total Study Hours</p>
+                                <strong id="total-study-hours">11.0 hrs</strong>
+                                <span>Across all planned tasks</span>
+                            </article>
+                            <article class="analytics-card">
+                                <p>Average Study Time</p>
+                                <strong id="average-study-time">2.8 hrs</strong>
+                                <span>Estimated time per task</span>
+                            </article>
+                        </div>
+                    </section>
+                </section>
+
+                <section class="content-section task-section" id="tasks">
                     <div class="section-heading">
                         <h2>Study Tasks</h2>
-                        <a class="secondary-button" href="#add-task">Add Task</a>
+                        <span class="section-caption">Current tasks aligned with the dashboard priorities</span>
                     </div>
 
                     <div class="task-layout">
                         <div class="user-summary">
                             <div class="avatar-placeholder"></div>
                             <div>
-                                <h3>User</h3>
-                                <p>You have 3 tasks remaining this week.</p>
+                                <h3>Weekly Snapshot</h3>
+                                <p id="task-summary">You have 4 tasks scheduled across four urgency levels.</p>
                             </div>
                         </div>
 
-                        <div class="task-card-row">
-                            <article class="task-card">
-                                <div class="icon-badge">RD</div>
-                                <h3>Study Chapter 5</h3>
-                                <p>Complexity: Medium</p>
-                            </article>
-
-                            <article class="task-card">
-                                <div class="icon-badge">RV</div>
-                                <h3>Review Lecture Notes</h3>
-                                <p>Complexity: Low</p>
-                            </article>
-                        </div>
-
-                        <div class="task-actions">
-                            <a class="primary-button small-button" href="#tasks">View All Tasks</a>
-                        </div>
+                        <div class="task-card-row" id="task-card-row"></div>
                     </div>
                 </section>
 
                 <section class="content-section" id="add-task">
-                    <h2>Add Task</h2>
+                    <div class="section-heading">
+                        <h2>Create Study Task</h2>
+                        <span class="section-caption">Add a task and place it into the simulated AI priority flow</span>
+                    </div>
 
-                    <form class="task-form">
+                    <form class="task-form" id="task-form">
                         <label>
-                            Task Name
-                            <input type="text" placeholder="Enter task name">
+                            Task Title
+                            <input id="task-title" type="text" name="title" placeholder="Enter task title" required>
                         </label>
 
                         <label>
                             Due Date
-                            <input type="date">
+                            <input id="task-date" type="date" name="dueDate" required>
                         </label>
 
-                        <fieldset class="complexity-group">
-                            <legend>Complexity</legend>
-                            <label><input type="radio" name="complexity" checked> Low</label>
-                            <label><input type="radio" name="complexity"> Medium</label>
-                            <label><input type="radio" name="complexity"> High</label>
-                        </fieldset>
+                        <label>
+                            Priority
+                            <select id="task-priority" name="priority">
+                                <option value="Urgent">Urgent</option>
+                                <option value="High">High</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            Estimated Study Time
+                            <input id="task-hours" type="number" name="hours" min="0.5" step="0.5" value="1.5" required>
+                        </label>
 
                         <div class="form-actions">
                             <button class="ghost-button" type="reset">Cancel</button>
@@ -197,5 +257,6 @@
             </footer>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
