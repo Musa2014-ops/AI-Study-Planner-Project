@@ -18,6 +18,7 @@
                 <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
                 <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
                 <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="ai" href="ai.html">AI</a>
                 <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
                 <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
             </nav>
@@ -28,6 +29,7 @@
                     <a href="dashboard.html">Dashboard</a>
                     <a href="calendar.html">Calendar</a>
                     <a href="progress.html">Progress</a>
+                    <a href="ai.html">AI</a>
                     <a href="notes.html">Notes</a>
                 </nav>
                 <div class="topbar-actions">
@@ -52,7 +54,7 @@
                         </article>
                     </div>
                 </section>
-                <section class="content-section notes-grid">
+                <section class="content-section notes-workspace notes-workspace-expanded">
                     <section class="panel-card notes-editor-card">
                         <div class="section-heading compact-heading">
                             <div>
@@ -60,37 +62,53 @@
                                 <h2>Write note</h2>
                             </div>
                         </div>
-                        <form class="notes-form" id="notes-form">
-                            <label>
-                                Note Title
-                                <input id="note-title" type="text" placeholder="Lecture summary" required>
-                            </label>
-                            <label>
-                                Attach To Task
-                                <select id="note-task"></select>
-                            </label>
-                            <label>
-                                Subject
-                                <input id="note-subject" type="text" placeholder="Optional for general notes">
-                            </label>
+                        <div class="notes-editor-status" id="notes-editor-status">Create a new note</div>
+                        <div class="notes-toolbar">
+                            <span class="notes-toolbar-pill">Focused writing space</span>
+                            <span class="notes-toolbar-pill">Task-linked notes</span>
+                        </div>
+                        <form class="notes-form notes-form-expanded" id="notes-form">
+                            <input id="editing-note-id" type="hidden">
+                            <div class="notes-meta-grid">
+                                <label>
+                                    Note Title
+                                    <input id="note-title" type="text" placeholder="Lecture summary" required>
+                                </label>
+                                <label>
+                                    Attach To Task
+                                    <select id="note-task"></select>
+                                </label>
+                                <label>
+                                    Subject
+                                    <input id="note-subject" type="text" placeholder="Optional for general notes">
+                                </label>
+                            </div>
                             <label class="notes-body-label">
                                 Note Content
-                                <textarea id="note-body" rows="14" placeholder="Write your notes here..." required></textarea>
+                                <textarea id="note-body" rows="22" placeholder="Write your notes here..." required></textarea>
                             </label>
                             <div class="form-actions">
                                 <button class="primary-button button-reset" type="submit">Save Note</button>
+                                <button class="ghost-button" id="cancel-note-edit" type="button">Cancel Edit</button>
                             </div>
                         </form>
                     </section>
-                    <section class="panel-card">
+                    <aside class="panel-card notes-side-panel">
                         <div class="section-heading compact-heading">
                             <div>
                                 <p class="card-label">Saved Notes</p>
                                 <h2>Your note list</h2>
                             </div>
                         </div>
+                        <div class="widget-stack">
+                            <article class="side-widget">
+                                <p class="card-label">Writing View</p>
+                                <h3>Document style layout</h3>
+                                <p class="task-meta">Use this side space for note browsing while the main editor stays large and focused.</p>
+                            </article>
+                        </div>
                         <div class="notes-list" id="note-list"></div>
-                    </section>
+                    </aside>
                 </section>
             </main>
             <footer class="footer">

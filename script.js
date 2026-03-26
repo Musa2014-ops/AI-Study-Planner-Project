@@ -615,11 +615,17 @@ function renderNotes() {
                     <p class="card-label">${note.subject}</p>
                     <h3>${note.title}</h3>
                 </div>
-                <button class="ghost-button small-button action-button" type="button" data-delete-note-id="${note.id}">Delete</button>
+                <div class="note-card-actions">
+                    <button class="ghost-button small-button action-button" type="button" data-view-note-id="${note.id}">
+                        View
+                    </button>
+                    <button class="ghost-button small-button action-button" type="button" data-edit-note-id="${note.id}">Edit</button>
+                    <button class="ghost-button small-button action-button" type="button" data-delete-note-id="${note.id}">Delete</button>
+                </div>
             </div>
             <p class="task-meta">${note.taskTitle}</p>
             <p class="task-meta">${formatDateTime(note.createdAt)}</p>
-            <p>${note.body}</p>
+            <p class="note-card-preview">${note.body.slice(0, 110)}${note.body.length > 110 ? "..." : ""}</p>
         </article>
     `).join("") || '<article class="note-card"><h3>No notes yet</h3><p class="task-meta">Save a note and link it to a task when needed.</p></article>';
 }
@@ -690,6 +696,18 @@ function refreshUI() {
     renderStoragePage();
     renderSettingsForm();
     updateAnalytics();
+}
+
+function resetNoteEditor() {
+    const form = qs("notes-form");
+    if (!form) {
+        return;
+    }
+
+    form.reset();
+    qs("editing-note-id").value = "";
+    setText("notes-editor-status", "Create a new note");
+    renderNoteTaskOptions();
 }
 
 function inferSubject(title, subject) {
@@ -814,6 +832,7 @@ function saveSettings(event) {
 function saveNote(event) {
     event.preventDefault();
 
+    const editingId = qs("editing-note-id")?.value || "";
     const title = qs("note-title")?.value.trim();
     const taskId = qs("note-task")?.value || "";
     const linkedTask = store.tasks.find((task) => task.id === taskId);
@@ -824,16 +843,42 @@ function saveNote(event) {
         return;
     }
 
-    store.notes.unshift(normalizeNote({
+    const nextNote = normalizeNote({
+        id: editingId || undefined,
         title,
         taskId,
         taskTitle: linkedTask?.title || "General Note",
         subject,
         body
-    }));
+    });
+
+    if (editingId) {
+        store.notes = store.notes.map((note) => note.id === editingId ? { ...note, ...nextNote, createdAt: note.createdAt } : note);
+    } else {
+        store.notes.unshift(nextNote);
+    }
+
     store = saveStore(store);
-    event.currentTarget.reset();
+    resetNoteEditor();
     refreshUI();
+}
+
+function loadNoteIntoEditor(noteId, mode = "edit") {
+    const note = store.notes.find((entry) => entry.id === noteId);
+    if (!note) {
+        return;
+    }
+
+    qs("editing-note-id").value = note.id;
+    qs("note-title").value = note.title;
+    qs("note-subject").value = note.subject;
+    qs("note-body").value = note.body;
+    renderNoteTaskOptions();
+    qs("note-task").value = note.taskId || "";
+    setText("notes-editor-status", mode === "view" ? "Viewing saved note" : "Editing saved note");
+    refreshUI();
+    document.querySelector(".notes-editor-card")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    qs("note-title")?.focus();
 }
 
 function toggleTaskCompletion(taskId) {
@@ -858,6 +903,18 @@ function handleActionClick(event) {
     const deleteButton = event.target.closest("[data-delete-note-id]");
     if (deleteButton) {
         deleteNote(deleteButton.dataset.deleteNoteId);
+        return;
+    }
+
+    const viewButton = event.target.closest("[data-view-note-id]");
+    if (viewButton) {
+        loadNoteIntoEditor(viewButton.dataset.viewNoteId, "view");
+        return;
+    }
+
+    const editButton = event.target.closest("[data-edit-note-id]");
+    if (editButton) {
+        loadNoteIntoEditor(editButton.dataset.editNoteId);
         return;
     }
 
@@ -894,6 +951,11 @@ function attachEvents() {
     const notesForm = qs("notes-form");
     if (notesForm) {
         notesForm.addEventListener("submit", saveNote);
+    }
+
+    const cancelEditButton = qs("cancel-note-edit");
+    if (cancelEditButton) {
+        cancelEditButton.addEventListener("click", resetNoteEditor);
     }
 }
 

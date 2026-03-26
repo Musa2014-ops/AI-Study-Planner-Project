@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Workspace | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="ai">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item" data-page="dashboard" href="dashboard.html">Dashboard</a>
+                <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
+                <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
+                <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="ai" href="ai.html">AI</a>
+                <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
+                <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="calendar.html">Calendar</a>
+                    <a href="progress.html">Progress</a>
+                    <a href="ai.html">AI</a>
+                </nav>
+                <div class="topbar-actions">
+                    <form class="search-box">
+                        <input type="search" placeholder="Search AI workspace">
+                    </form>
+                    <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
+                </div>
+            </header>
+            <main class="dashboard">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">AI Workspace</p>
+                        <h1>Future AI page</h1>
+                        <p>This page is prepared for your upcoming AI assistant features and side widgets.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <a class="primary-button" href="dashboard.html">Back to Dashboard</a>
+                    </div>
+                </section>
+                <section class="content-section ai-workspace-grid">
+                    <section class="panel-card ai-canvas">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">Main AI Area</p>
+                                <h2>Empty workspace</h2>
+                            </div>
+                        </div>
+                        <div class="ai-placeholder">
+                            <h3>AI features can go here</h3>
+                            <p class="task-meta">This main panel is left open so you can add chat, recommendations, summaries, or generation tools later.</p>
+                        </div>
+                    </section>
+                    <aside class="widget-stack">
+                        <article class="side-widget">
+                            <p class="card-label">Widget 1</p>
+                            <h3>Task Suggestions</h3>
+                            <p class="task-meta">Ready for AI hints or next-action cards.</p>
+                        </article>
+                        <article class="side-widget">
+                            <p class="card-label">Widget 2</p>
+                            <h3>Study Insights</h3>
+                            <p class="task-meta">Ready for performance summaries or alerts.</p>
+                        </article>
+                        <article class="side-widget">
+                            <p class="card-label">Widget 3</p>
+                            <h3>Quick Actions</h3>
+                            <p class="task-meta">Ready for smart shortcuts and automation buttons.</p>
+                        </article>
+                    </aside>
+                </section>
+            </main>
+            <footer class="footer">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="notes.html">Notes</a>
+                <a href="settings.html">Settings</a>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
