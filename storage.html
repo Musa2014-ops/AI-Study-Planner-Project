@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storage Debug | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="storage">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item" data-page="dashboard" href="dashboard.html">Dashboard</a>
+                <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
+                <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
+                <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
+                <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="calendar.html">Calendar</a>
+                    <a href="settings.html">Settings</a>
+                </nav>
+                <div class="topbar-actions">
+                    <p class="debug-pill">Debug only</p>
+                    <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
+                </div>
+            </header>
+            <main class="dashboard">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Storage Debug</p>
+                        <h1>Hidden local JSON data</h1>
+                        <p>This page is kept out of user navigation and only opens when the debug query is used.</p>
+                    </div>
+                </section>
+                <section class="content-section storage-grid">
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Stored Tasks</p>
+                        <strong id="storage-task-count">0</strong>
+                        <span>Tasks saved in local storage</span>
+                    </article>
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Modules</p>
+                        <strong id="storage-module-count">0</strong>
+                        <span>Subjects derived from the task list</span>
+                    </article>
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Study Plans</p>
+                        <strong id="storage-plan-count">0</strong>
+                        <span>Generated study blocks in this cycle</span>
+                    </article>
+                </section>
+                <section class="content-section">
+                    <div class="section-heading">
+                        <h2>Stored JSON</h2>
+                        <span class="section-caption">users, tasks, modules, settings, studyPlans, and notes</span>
+                    </div>
+                    <article class="json-card">
+                        <pre id="storage-dump"></pre>
+                    </article>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

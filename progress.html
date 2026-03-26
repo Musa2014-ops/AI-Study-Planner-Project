@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="progress">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item" data-page="dashboard" href="dashboard.html">Dashboard</a>
+                <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
+                <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
+                <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
+                <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="calendar.html">Calendar</a>
+                    <a href="notes.html">Notes</a>
+                    <a href="settings.html">Settings</a>
+                </nav>
+                <div class="topbar-actions">
+                    <form class="search-box">
+                        <input type="search" placeholder="Search progress insights">
+                    </form>
+                    <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
+                </div>
+            </header>
+            <main class="dashboard">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Progress Tracking</p>
+                        <h1>Study performance snapshot</h1>
+                        <p>The analytics view updates from task entries and completion changes so users can see their progress move immediately.</p>
+                    </div>
+                </section>
+                <section class="dashboard-overview content-section">
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Tasks Completed</p>
+                        <strong id="progress-completed-count">0</strong>
+                        <span>Completed tasks stored in the planner</span>
+                    </article>
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Total Study Hours</p>
+                        <strong id="progress-total-hours">0.0 hrs</strong>
+                        <span>Combined planned and completed study hours</span>
+                    </article>
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Average Study Hours</p>
+                        <strong id="progress-average-hours">0.0 hrs</strong>
+                        <span>Average workload across tasks</span>
+                    </article>
+                </section>
+                <section class="content-section">
+                    <div class="chart-grid">
+                        <article class="chart-card">
+                            <h3>Study Load by Day</h3>
+                            <p>Daily study capacity against your weekly plan</p>
+                            <div class="bar-chart" id="progress-bar-chart"></div>
+                            <div class="chart-axis">
+                                <span>This Week</span>
+                                <span>Daily Capacity</span>
+                            </div>
+                        </article>
+                        <article class="chart-card">
+                            <h3>Hours by Subject</h3>
+                            <p>Distribution across modules</p>
+                            <div class="pie-chart" id="subject-pie-chart"></div>
+                            <ul class="subject-legend" id="subject-legend"></ul>
+                        </article>
+                    </div>
+                </section>
+                <section class="content-section">
+                    <div class="section-heading">
+                        <h2>Module Workload</h2>
+                        <span class="section-caption">Subjects generated from stored tasks and planner activity</span>
+                    </div>
+                    <div class="dashboard-overview" id="module-grid"></div>
+                </section>
+            </main>
+            <footer class="footer">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="calendar.html">Calendar</a>
+                <a href="notes.html">Notes</a>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

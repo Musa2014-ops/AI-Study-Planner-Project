@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="login">
+    <div class="app-shell">
+        <div class="main-panel">
+            <main class="login-layout">
+                <section class="login-panel">
+                    <p class="eyebrow">StudyBuddy</p>
+                    <h2>Create account or sign in</h2>
+                    <p>Use your own account to keep your tasks, notes, and planner data separate.</p>
+                    <p class="auth-message" id="auth-message"></p>
+
+                    <div class="auth-grid">
+                        <section class="auth-card">
+                            <p class="card-label">Sign Up</p>
+                            <form class="login-form auth-form" id="signup-form">
+                                <label>
+                                    Full Name
+                                    <input id="signup-name" type="text" placeholder="Enter your name" required>
+                                </label>
+                                <label>
+                                    Email
+                                    <input id="signup-email" type="email" placeholder="Enter your email" required>
+                                </label>
+                                <label class="auth-span">
+                                    Password
+                                    <input id="signup-password" type="password" placeholder="Create a password" required>
+                                </label>
+                                <div class="form-actions">
+                                    <button class="primary-button button-reset" type="submit">Create Account</button>
+                                </div>
+                            </form>
+                        </section>
+
+                        <section class="auth-card">
+                            <p class="card-label">Sign In</p>
+                            <form class="login-form auth-form" id="signin-form">
+                                <label>
+                                    Email
+                                    <input id="signin-email" type="email" placeholder="Enter your email" required>
+                                </label>
+                                <label>
+                                    Password
+                                    <input id="signin-password" type="password" placeholder="Enter your password" required>
+                                </label>
+                                <div class="form-actions">
+                                    <button class="ghost-button" type="submit">Sign In</button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

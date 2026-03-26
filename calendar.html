@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="calendar">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item" data-page="dashboard" href="dashboard.html">Dashboard</a>
+                <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
+                <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
+                <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
+                <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="calendar.html">Calendar</a>
+                    <a href="add-task.html">Add Task</a>
+                    <a href="notes.html">Notes</a>
+                </nav>
+                <div class="topbar-actions">
+                    <form class="search-box">
+                        <input type="search" placeholder="Search weekly study blocks">
+                    </form>
+                    <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
+                </div>
+            </header>
+            <main class="dashboard">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Weekly Schedule</p>
+                        <h1>Calendar study view</h1>
+                        <p>Tasks are placed into a seven-day schedule using urgency, difficulty, workload, and your preferred daily hours.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <a class="primary-button" href="add-task.html">Add New Task</a>
+                        <a class="ghost-button" href="progress.html">View Progress</a>
+                    </div>
+                </section>
+                <section class="content-section">
+                    <div class="section-heading">
+                        <h2>Weekly Study Schedule</h2>
+                        <span class="section-caption">Tasks appear in recommended order based on deadline urgency</span>
+                    </div>
+                    <div class="calendar-week-grid" id="calendar-week-grid"></div>
+                </section>
+                <section class="content-section">
+                    <div class="section-heading">
+                        <h2>Planned Study Blocks</h2>
+                        <span class="section-caption">Generated from the current AI study plan</span>
+                    </div>
+                    <div class="study-plan-list" id="study-plan-list"></div>
+                </section>
+            </main>
+            <footer class="footer">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="progress.html">Progress</a>
+                <a href="notes.html">Notes</a>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="settings">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item" data-page="dashboard" href="dashboard.html">Dashboard</a>
+                <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
+                <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
+                <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
+                <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="progress.html">Progress</a>
+                    <a href="notes.html">Notes</a>
+                </nav>
+                <div class="topbar-actions">
+                    <form class="search-box">
+                        <input type="search" placeholder="Search settings">
+                    </form>
+                    <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
+                </div>
+            </header>
+            <main class="dashboard">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Planner Settings</p>
+                        <h1>Configure your AI planner</h1>
+                        <p>Adjust daily study hours, preferred study times, and difficulty weighting to influence the generated schedule and task scores.</p>
+                    </div>
+                </section>
+                <section class="content-section page-grid">
+                    <section class="panel-card">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">Preferences</p>
+                                <h2>Study settings</h2>
+                            </div>
+                        </div>
+                        <form class="settings-form" id="settings-form">
+                            <label>
+                                Daily Study Hours
+                                <input id="daily-study-hours" type="number" min="1" max="12" step="0.5" required>
+                            </label>
+                            <label>
+                                Preferred Study Time
+                                <input id="preferred-study-time" type="text" placeholder="18:00-20:00" required>
+                            </label>
+                            <label>
+                                Task Difficulty Weighting
+                                <select id="difficulty-weighting">
+                                    <option value="0.75">Light</option>
+                                    <option value="1">Balanced</option>
+                                    <option value="1.25">High Focus</option>
+                                    <option value="1.5">Intensive</option>
+                                </select>
+                            </label>
+                            <div class="form-actions">
+                                <button class="primary-button button-reset" type="submit">Save Settings</button>
+                            </div>
+                        </form>
+                    </section>
+                    <section class="setting-card">
+                        <p class="card-label">Current Output</p>
+                        <h3 class="setting-highlight">Changes recalculate the planner immediately.</h3>
+                        <p class="setting-copy">The dashboard, weekly calendar, progress charts, and study plan all refresh from these settings.</p>
+                    </section>
+                </section>
+                <section class="content-section stats-section">
+                    <h2>Current Study Statistics</h2>
+                    <div class="stats-grid">
+                        <article class="stat-card">
+                            <p>Total Tasks</p>
+                            <strong id="settings-total-tasks">0</strong>
+                        </article>
+                        <article class="stat-card">
+                            <p>Tasks Completed</p>
+                            <strong id="settings-completed-tasks">0</strong>
+                        </article>
+                        <article class="stat-card">
+                            <p>Upcoming Deadlines</p>
+                            <strong id="settings-deadlines">0</strong>
+                        </article>
+                    </div>
+                </section>
+            </main>
+            <footer class="footer">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="progress.html">Progress</a>
+                <a href="notes.html">Notes</a>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

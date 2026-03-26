@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="notes">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item" data-page="dashboard" href="dashboard.html">Dashboard</a>
+                <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
+                <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
+                <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
+                <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="calendar.html">Calendar</a>
+                    <a href="progress.html">Progress</a>
+                    <a href="notes.html">Notes</a>
+                </nav>
+                <div class="topbar-actions">
+                    <form class="search-box">
+                        <input type="search" placeholder="Search notes">
+                    </form>
+                    <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
+                </div>
+            </header>
+            <main class="dashboard">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Notes</p>
+                        <h1>Save notes for each task</h1>
+                        <p>Choose a saved task and write notes in a larger workspace.</p>
+                    </div>
+                    <div class="hero-actions">
+                        <article class="overview-card mini-stat-card notes-stat">
+                            <p class="card-label">Saved Notes</p>
+                            <strong id="notes-count">0</strong>
+                            <span>Notes in your account</span>
+                        </article>
+                    </div>
+                </section>
+                <section class="content-section notes-grid">
+                    <section class="panel-card notes-editor-card">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">New Note</p>
+                                <h2>Write note</h2>
+                            </div>
+                        </div>
+                        <form class="notes-form" id="notes-form">
+                            <label>
+                                Note Title
+                                <input id="note-title" type="text" placeholder="Lecture summary" required>
+                            </label>
+                            <label>
+                                Attach To Task
+                                <select id="note-task"></select>
+                            </label>
+                            <label>
+                                Subject
+                                <input id="note-subject" type="text" placeholder="Optional for general notes">
+                            </label>
+                            <label class="notes-body-label">
+                                Note Content
+                                <textarea id="note-body" rows="14" placeholder="Write your notes here..." required></textarea>
+                            </label>
+                            <div class="form-actions">
+                                <button class="primary-button button-reset" type="submit">Save Note</button>
+                            </div>
+                        </form>
+                    </section>
+                    <section class="panel-card">
+                        <div class="section-heading compact-heading">
+                            <div>
+                                <p class="card-label">Saved Notes</p>
+                                <h2>Your note list</h2>
+                            </div>
+                        </div>
+                        <div class="notes-list" id="note-list"></div>
+                    </section>
+                </section>
+            </main>
+            <footer class="footer">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="calendar.html">Calendar</a>
+                <a href="settings.html">Settings</a>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

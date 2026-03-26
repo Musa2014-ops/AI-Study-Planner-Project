@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task | StudyBuddy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="add-task">
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a class="nav-item" data-page="dashboard" href="dashboard.html">Dashboard</a>
+                <a class="nav-item" data-page="calendar" href="calendar.html">Calendar</a>
+                <a class="nav-item" data-page="add-task" href="add-task.html">Add Task</a>
+                <a class="nav-item" data-page="progress" href="progress.html">Progress</a>
+                <a class="nav-item" data-page="notes" href="notes.html">Notes</a>
+                <a class="nav-item" data-page="settings" href="settings.html">Settings</a>
+            </nav>
+        </aside>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="calendar.html">Calendar</a>
+                    <a href="progress.html">Progress</a>
+                    <a href="notes.html">Notes</a>
+                </nav>
+                <div class="topbar-actions">
+                    <form class="search-box">
+                        <input type="search" placeholder="Search tasks">
+                    </form>
+                    <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
+                </div>
+            </header>
+            <main class="dashboard">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Task Input</p>
+                        <h1>Add a task into the planner</h1>
+                        <p>Saving a task updates the dashboard, study calendar, progress statistics, and task table automatically.</p>
+                    </div>
+                </section>
+
+                <section class="dashboard-overview content-section">
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Projected Active Tasks</p>
+                        <strong id="preview-task-count">0</strong>
+                        <span>Updates while you fill in the form</span>
+                    </article>
+                    <article class="overview-card mini-stat-card">
+                        <p class="card-label">Projected Study Hours</p>
+                        <strong id="preview-total-hours">0.0 hrs</strong>
+                        <span>Estimated active workload after saving</span>
+                    </article>
+                </section>
+
+                <section class="content-section quick-task-panel">
+                    <div class="section-heading">
+                        <h2>Task Form</h2>
+                        <span class="section-caption">Use one data model across every planner page</span>
+                    </div>
+                    <form class="task-form" id="task-form">
+                        <label>
+                            Task Title
+                            <input id="task-title" type="text" name="title" placeholder="Enter task title" required>
+                        </label>
+                        <label>
+                            Subject
+                            <input id="task-subject" type="text" name="subject" placeholder="Enter subject">
+                        </label>
+                        <label>
+                            Due Date
+                            <input id="task-date" type="date" name="dueDate" required>
+                        </label>
+                        <label>
+                            Priority
+                            <select id="task-priority" name="priority">
+                                <option value="Urgent">Urgent</option>
+                                <option value="High">High</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </label>
+                        <label>
+                            Difficulty
+                            <select id="task-difficulty" name="difficulty">
+                                <option value="Challenging">Challenging</option>
+                                <option value="Moderate" selected>Moderate</option>
+                                <option value="Light">Light</option>
+                            </select>
+                        </label>
+                        <label>
+                            Study Hours
+                            <input id="task-hours" type="number" name="hours" min="0.5" step="0.5" value="1.5" required>
+                        </label>
+                        <div class="form-actions">
+                            <button class="ghost-button" type="reset">Clear</button>
+                            <button class="primary-button button-reset" type="submit">Save Task</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="content-section">
+                    <div class="section-heading">
+                        <h2>Current Tasks</h2>
+                        <span class="section-caption">Mark tasks complete to update the live analytics and charts</span>
+                    </div>
+                    <article class="table-card table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Subject</th>
+                                    <th>Deadline</th>
+                                    <th>Priority</th>
+                                    <th>Hours</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="task-table-body"></tbody>
+                        </table>
+                    </article>
+                </section>
+            </main>
+            <footer class="footer">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="calendar.html">Calendar</a>
+                <a href="notes.html">Notes</a>
+            </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
