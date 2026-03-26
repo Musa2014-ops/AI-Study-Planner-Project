@@ -1,18 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Planner</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner | StudyBuddy</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
 
-<header>
-    <h1>Planner Page</h1>
-</header>
+            <nav class="sidebar-nav">
+                <a class="nav-item" href="index.html">Dashboard</a>
+                <a class="nav-item active" href="planner.html">Planner</a>
+                <a class="nav-item" href="about.html">About</a>
+            </nav>
+        </aside>
 
-<main>
-    <p>Tasks will go here.</p>
-</main>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="index.html">Home</a>
+                    <a href="planner.html">Planner</a>
+                    <a href="about.html">About</a>
+                </nav>
+            </header>
 
+            <main class="dashboard">
+                <section class="hero">
+                    <h1>Planner Workspace</h1>
+                    <p>Your weekly study plan and task list can live here as the project grows.</p>
+                    <a class="primary-button" href="index.html#add-task">Create a Task</a>
+                </section>
+            </main>
+        </div>
+    </div>
 </body>
 </html>

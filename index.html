@@ -1,28 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AI Study Planner</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBuddy Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="app-shell">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                <span>StudyBuddy</span>
+            </div>
 
-<header>
-    <h1>AI Study Planner</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="planner.html">Planner</a>
-        <a href="about.html">About</a>
-    </nav>
-</header>
+            <nav class="sidebar-nav">
+                <a class="nav-item active" href="#dashboard">Dashboard</a>
+                <a class="nav-item" href="#calendar">Calendar</a>
+                <a class="nav-item" href="#add-task">Add Task</a>
+                <a class="nav-item" href="#progress">Progress</a>
+                <a class="nav-item" href="#settings">Settings</a>
+            </nav>
+        </aside>
 
-<main>
-    <h2>Welcome</h2>
-    <p>This is your AI Study Planner homepage.</p>
+        <div class="main-panel">
+            <header class="topbar">
+                <nav class="top-nav">
+                    <a href="#home">Home</a>
+                    <a href="#modules">Modules</a>
+                    <a href="#calendar">Calendar</a>
+                    <a href="#progress">Progress</a>
+                </nav>
 
-    <button onclick="location.href='planner.html'">
-        Go to Planner
-    </button>
-</main>
+                <form class="search-box">
+                    <input type="search" placeholder="Search study tasks">
+                </form>
+            </header>
 
+            <main class="dashboard">
+                <section class="hero" id="dashboard">
+                    <h1>Welcome to StudyBuddy</h1>
+                    <p>Your AI-powered study planner.</p>
+                    <a class="primary-button" href="#add-task">Get Started</a>
+                </section>
+
+                <section class="content-section" id="calendar">
+                    <h2>Upcoming Deadlines</h2>
+                    <div class="deadline-grid">
+                        <article class="deadline-card">
+                            <div class="icon-badge">DL</div>
+                            <h3>Assignment 1</h3>
+                            <p>Due in 2 days</p>
+                            <strong>Subject: Math</strong>
+                        </article>
+
+                        <article class="deadline-card">
+                            <div class="icon-badge">EX</div>
+                            <h3>Midterm Exam</h3>
+                            <p>Next week</p>
+                            <strong>Subject: Physics</strong>
+                        </article>
+
+                        <article class="deadline-card">
+                            <div class="icon-badge">PR</div>
+                            <h3>Project Submission</h3>
+                            <p>Due in 1 week</p>
+                            <strong>Subject: Computer Science</strong>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="content-section task-section">
+                    <div class="section-heading">
+                        <h2>Study Tasks</h2>
+                        <a class="secondary-button" href="#add-task">Add Task</a>
+                    </div>
+
+                    <div class="task-layout">
+                        <div class="user-summary">
+                            <div class="avatar-placeholder"></div>
+                            <div>
+                                <h3>User</h3>
+                                <p>You have 3 tasks remaining this week.</p>
+                            </div>
+                        </div>
+
+                        <div class="task-card-row">
+                            <article class="task-card">
+                                <div class="icon-badge">RD</div>
+                                <h3>Study Chapter 5</h3>
+                                <p>Complexity: Medium</p>
+                            </article>
+
+                            <article class="task-card">
+                                <div class="icon-badge">RV</div>
+                                <h3>Review Lecture Notes</h3>
+                                <p>Complexity: Low</p>
+                            </article>
+                        </div>
+
+                        <div class="task-actions">
+                            <a class="primary-button small-button" href="#tasks">View All Tasks</a>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section" id="add-task">
+                    <h2>Add Task</h2>
+
+                    <form class="task-form">
+                        <label>
+                            Task Name
+                            <input type="text" placeholder="Enter task name">
+                        </label>
+
+                        <label>
+                            Due Date
+                            <input type="date">
+                        </label>
+
+                        <fieldset class="complexity-group">
+                            <legend>Complexity</legend>
+                            <label><input type="radio" name="complexity" checked> Low</label>
+                            <label><input type="radio" name="complexity"> Medium</label>
+                            <label><input type="radio" name="complexity"> High</label>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <button class="ghost-button" type="reset">Cancel</button>
+                            <button class="primary-button button-reset" type="submit">Save Task</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="content-section" id="progress">
+                    <h2>Study Progress</h2>
+
+                    <div class="chart-grid">
+                        <article class="chart-card">
+                            <h3>Tasks Completed</h3>
+                            <p>Number of tasks</p>
+                            <div class="bar-chart" aria-label="Bar chart showing completed tasks by week">
+                                <span style="height: 72%;"></span>
+                                <span style="height: 54%;"></span>
+                                <span style="height: 33%;"></span>
+                                <span style="height: 57%;"></span>
+                                <span style="height: 41%;"></span>
+                                <span style="height: 68%;"></span>
+                                <span style="height: 49%;"></span>
+                            </div>
+                            <div class="chart-axis">
+                                <span>Week</span>
+                            </div>
+                        </article>
+
+                        <article class="chart-card">
+                            <h3>Study Hours by Subject</h3>
+                            <p>Hours</p>
+                            <div class="pie-chart" aria-label="Pie chart showing study hours by subject"></div>
+                            <div class="chart-axis">
+                                <span>Subjects</span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="quote-panel">
+                    <p>Your AI helper is here to assist you in prioritising your study tasks.</p>
+                </section>
+
+                <section class="content-section stats-section" id="settings">
+                    <h2>Current Study Statistics</h2>
+                    <div class="stats-grid">
+                        <article class="stat-card">
+                            <p>Total Tasks</p>
+                            <strong>10</strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <p>Tasks Completed</p>
+                            <strong>7</strong>
+                        </article>
+
+                        <article class="stat-card">
+                            <p>Upcoming Deadlines</p>
+                            <strong>3</strong>
+                        </article>
+                    </div>
+                </section>
+            </main>
+
+            <footer class="footer">
+                <a href="about.html">Privacy Policy</a>
+                <a href="about.html">Terms of Use</a>
+                <a href="about.html">Contact Us</a>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>
