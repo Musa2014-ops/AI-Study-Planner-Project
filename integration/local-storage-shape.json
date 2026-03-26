@@ -1,0 +1,57 @@
+{
+  "studyBuddyAccounts": {
+    "": {
+      "id": "",
+      "name": "",
+      "email": "",
+      "password": "",
+      "planner": {
+        "users": [
+          {
+            "id": "",
+            "name": "",
+            "email": ""
+          }
+        ],
+        "settings": {
+          "dailyStudyHours": 4,
+          "preferredStudyTime": "",
+          "taskDifficultyWeighting": 1
+        },
+        "tasks": [
+          {
+            "id": "",
+            "title": "",
+            "subject": "",
+            "deadline": "",
+            "priority": "",
+            "hours": 0,
+            "difficulty": "",
+            "completed": false
+          }
+        ],
+        "notes": [
+          {
+            "id": "",
+            "title": "",
+            "taskId": "",
+            "taskTitle": "",
+            "subject": "",
+            "body": "",
+            "createdAt": ""
+          }
+        ],
+        "modules": [],
+        "studyPlans": []
+      }
+    }
+  },
+  "studyBuddySession": "",
+  "studyBuddyAIConfig": {
+    "provider": "gemini",
+    "enabled": true,
+    "apiKey": "",
+    "model": "gemini-1.5-flash",
+    "purpose": "Organise notes and generate study plans"
+  }
+}
