@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Workspace | StudyBuddy</title>
+    <title>Ask Gemini | StudyBuddy</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body data-page="ai">
@@ -33,7 +33,7 @@
                 </nav>
                 <div class="topbar-actions">
                     <form class="search-box">
-                        <input type="search" placeholder="Search AI workspace">
+                        <input type="search" placeholder="Search AI tools">
                     </form>
                     <button class="ghost-button small-button" type="button" data-logout>Log Out</button>
                 </div>
@@ -41,42 +41,72 @@
             <main class="dashboard">
                 <section class="hero">
                     <div class="hero-copy">
-                        <p class="eyebrow">AI Workspace</p>
-                        <h1>Future AI page</h1>
-                        <p>This page is prepared for your upcoming AI assistant features and side widgets.</p>
+                        <p class="eyebrow">Ask Gemini</p>
+                        <h1>Generate a study plan from your current tasks</h1>
+                        <p>Gemini helps organise your workload into a clearer study plan using the tasks already saved in StudyBuddy.</p>
                     </div>
                     <div class="hero-actions">
-                        <a class="primary-button" href="dashboard.html">Back to Dashboard</a>
+                        <a class="primary-button" href="#ask-gemini">Generate a Plan</a>
+                        <a class="ghost-button" href="dashboard.html">Back to Dashboard</a>
                     </div>
                 </section>
                 <section class="content-section ai-workspace-grid">
-                    <section class="panel-card ai-canvas">
+                    <section class="panel-card ai-canvas" id="ask-gemini">
                         <div class="section-heading compact-heading">
                             <div>
-                                <p class="card-label">Main AI Area</p>
-                                <h2>Empty workspace</h2>
+                                <p class="card-label">Study Plan Generator</p>
+                                <h2>Ask Gemini what to focus on next</h2>
                             </div>
+                            <span class="section-caption">Build a personalised study plan from your saved tasks</span>
                         </div>
-                        <div class="ai-placeholder">
-                            <h3>AI features can go here</h3>
-                            <p class="task-meta">This main panel is left open so you can add chat, recommendations, summaries, or generation tools later.</p>
+                        <form class="notes-form ai-generator-form" id="gemini-form">
+                            <label>
+                                What do you want help with?
+                                <textarea id="gemini-prompt" placeholder="Example: Build me a realistic plan for this week and prioritise the closest deadlines."></textarea>
+                            </label>
+                            <div class="form-actions">
+                                <button class="primary-button button-reset" type="submit">Generate Study Plan</button>
+                            </div>
+                        </form>
+
+                        <div class="ai-result-shell">
+                            <article class="ai-result-card">
+                                <p class="card-label">Gemini Summary</p>
+                                <h3 id="gemini-summary-title">No plan generated yet</h3>
+                                <p class="task-meta" id="gemini-summary-text">Submit a prompt and StudyBuddy will create a study plan from your current tasks.</p>
+                            </article>
+
+                            <article class="ai-result-card">
+                                <div class="section-heading compact-heading">
+                                    <div>
+                                        <p class="card-label">Generated Sessions</p>
+                                        <h3>Recommended study blocks</h3>
+                                    </div>
+                                </div>
+                                <div class="ai-session-list" id="gemini-session-list">
+                                    <div class="ai-session-card empty-card">
+                                        <strong>Waiting for input</strong>
+                                        <p class="task-meta">Your generated study sessions will appear here.</p>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
                     </section>
                     <aside class="widget-stack">
                         <article class="side-widget">
-                            <p class="card-label">Widget 1</p>
-                            <h3>Task Suggestions</h3>
-                            <p class="task-meta">Ready for AI hints or next-action cards.</p>
+                            <p class="card-label">How It Works</p>
+                            <h3>Uses your saved tasks</h3>
+                            <p class="task-meta">Gemini reads the tasks already stored in StudyBuddy and builds a suggested weekly focus plan.</p>
                         </article>
                         <article class="side-widget">
-                            <p class="card-label">Widget 2</p>
-                            <h3>Study Insights</h3>
-                            <p class="task-meta">Ready for performance summaries or alerts.</p>
+                            <p class="card-label">Gemini Setup</p>
+                            <h3 id="gemini-model-name">Gemini model</h3>
+                            <p class="task-meta" id="gemini-config-status">Gemini is configured through the app settings and used to support study planning features.</p>
                         </article>
                         <article class="side-widget">
-                            <p class="card-label">Widget 3</p>
-                            <h3>Quick Actions</h3>
-                            <p class="task-meta">Ready for smart shortcuts and automation buttons.</p>
+                            <p class="card-label">Study Support</p>
+                            <h3>Smarter planning</h3>
+                            <p class="task-meta">Use Ask Gemini to organise priorities, break work into sessions, and shape a clearer weekly plan.</p>
                         </article>
                     </aside>
                 </section>

@@ -1,0 +1,7 @@
+{
+  "provider": "gemini",
+  "enabled": true,
+  "apiKey": "add-key-here-when-ready",
+  "model": "gemini-1.5-flash",
+  "purpose": "Organise notes and generate study plans"
+}

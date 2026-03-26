@@ -1,0 +1,57 @@
+{
+  "studyBuddyAccounts": {
+    "student@example.com": {
+      "id": "user-001",
+      "name": "Demo Student",
+      "email": "student@example.com",
+      "password": "prototype-password",
+      "planner": {
+        "users": [
+          {
+            "id": "user-001",
+            "name": "Demo Student",
+            "email": "student@example.com"
+          }
+        ],
+        "settings": {
+          "dailyStudyHours": 4,
+          "preferredStudyTime": "18:00-20:00",
+          "taskDifficultyWeighting": 1
+        },
+        "tasks": [
+          {
+            "id": "task-001",
+            "title": "Physics Revision",
+            "subject": "Physics",
+            "deadline": "2026-03-30",
+            "priority": "High",
+            "hours": 2,
+            "difficulty": "Moderate",
+            "completed": false
+          }
+        ],
+        "notes": [
+          {
+            "id": "note-001",
+            "title": "Momentum formulas",
+            "taskId": "task-001",
+            "taskTitle": "Physics Revision",
+            "subject": "Physics",
+            "body": "Impulse equals change in momentum.",
+            "createdAt": "2026-03-26T18:00:00.000Z"
+          }
+        ],
+        "modules": [],
+        "studyPlans": []
+      }
+    }
+  },
+  "studyBuddySession": "student@example.com",
+  "studyBuddyAIConfig": {
+    "provider": "gemini",
+    "enabled": true,
+    "apiKey": "add-key-here-when-ready",
+    "model": "gemini-1.5-flash",
+    "purpose": "Organise notes and generate study plans"
+  }
+}

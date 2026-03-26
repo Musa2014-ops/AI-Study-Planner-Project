@@ -1,5 +1,6 @@
 const ACCOUNTS_KEY = "studyBuddyAccounts";
 const SESSION_KEY = "studyBuddySession";
+const AI_CONFIG_KEY = "studyBuddyAIConfig";
 const priorityOrder = ["Urgent", "High", "Medium", "Low"];
 const priorityWeights = { Urgent: 10, High: 7, Medium: 4, Low: 2 };
 const difficultyWeights = { Challenging: 4, Moderate: 2.5, Light: 1.5 };
@@ -8,6 +9,14 @@ const starterSettings = {
     dailyStudyHours: 4,
     preferredStudyTime: "18:00-20:00",
     taskDifficultyWeighting: 1
+};
+
+const defaultAiConfig = {
+    provider: "gemini",
+    enabled: true,
+    apiKey: "",
+    model: "gemini-1.5-flash",
+    purpose: "Organise notes and generate study plans"
 };
 
 function cloneData(data) {
@@ -24,12 +33,71 @@ function qs(id) {
     return document.getElementById(id);
 }
 
+function escapeHtml(value) {
+    return String(value || "").replace(/[&<>"']/g, (character) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+    }[character]));
+}
+
 function currentPage() {
     return document.body.dataset.page || "";
 }
 
 function normalizeEmail(email) {
     return (email || "").trim().toLowerCase();
+}
+
+function loadAiConfig() {
+    try {
+        return {
+            ...defaultAiConfig,
+            ...JSON.parse(localStorage.getItem(AI_CONFIG_KEY) || "{}")
+        };
+    } catch (error) {
+        return { ...defaultAiConfig };
+    }
+}
+
+function saveAiConfig(config) {
+    localStorage.setItem(AI_CONFIG_KEY, JSON.stringify({
+        ...defaultAiConfig,
+        ...(config || {})
+    }));
+}
+
+function buildGeminiStudyPlanPayload(activeStore) {
+    if (!activeStore) {
+        return null;
+    }
+
+    return {
+        provider: "gemini",
+        model: loadAiConfig().model,
+        settings: activeStore.settings,
+        tasks: activeStore.orderedTasks.map((task) => ({
+            title: task.title,
+            subject: task.subject,
+            deadline: task.deadline,
+            priority: task.priority,
+            difficulty: task.difficulty,
+            hours: task.hours
+        })),
+        prompt: "Create a balanced weekly study plan from these tasks. Prioritise near deadlines, difficult tasks, and realistic daily study limits."
+    };
+}
+
+function buildGeminiNotesPayload(note) {
+    return {
+        provider: "gemini",
+        model: loadAiConfig().model,
+        title: note?.title || "Untitled Note",
+        body: note?.body || "",
+        prompt: "Organise these study notes into a concise summary, key topics, action items, and revision questions."
+    };
 }
 
 function loadAccounts() {
@@ -96,7 +164,12 @@ function blankStore(user) {
         tasks: [],
         modules: [],
         studyPlans: [],
-        notes: []
+        notes: [],
+        aiAssistant: {
+            lastPrompt: "",
+            lastGeneratedAt: "",
+            lastPlan: null
+        }
     };
 }
 
@@ -333,6 +406,11 @@ function loadStore() {
     planner.notes = planner.notes || [];
     planner.modules = planner.modules || [];
     planner.studyPlans = planner.studyPlans || [];
+    planner.aiAssistant = planner.aiAssistant || {
+        lastPrompt: "",
+        lastGeneratedAt: "",
+        lastPlan: null
+    };
     return buildStoreModel(planner);
 }
 
@@ -354,7 +432,8 @@ function saveStore(nextStore) {
             tasks: model.tasks,
             modules: model.modules,
             studyPlans: model.studyPlans,
-            notes: model.notes
+            notes: model.notes,
+            aiAssistant: model.aiAssistant
         }
     };
     saveAccounts(accounts);
@@ -660,6 +739,108 @@ function renderSettingsForm() {
     qs("difficulty-weighting").value = String(store.settings.taskDifficultyWeighting);
 }
 
+function buildGeminiMvpPlan(promptText) {
+    const prompt = promptText.trim() || "Create a balanced study plan for my current workload.";
+    const sessions = [];
+
+    (store?.weeklySchedule || []).forEach((day) => {
+        day.slots.forEach((slot) => {
+            if (sessions.length < 6) {
+                sessions.push({
+                    day: day.label,
+                    title: slot.title,
+                    subject: slot.subject,
+                    hours: slot.hours,
+                    priority: slot.priority,
+                    reason: `${slot.priority} priority with ${getDeadlineLabel(slot.deadline).toLowerCase()}`
+                });
+            }
+        });
+    });
+
+    if (!sessions.length) {
+        (store?.orderedTasks || []).slice(0, 3).forEach((task, index) => {
+            sessions.push({
+                day: `Session ${index + 1}`,
+                title: task.title,
+                subject: task.subject,
+                hours: Math.max(1, Math.min(3, Number(task.recommendedHours || task.hours || 1))),
+                priority: task.priority,
+                reason: `${task.priority} priority and ${getDeadlineLabel(task.deadline).toLowerCase()}`
+            });
+        });
+    }
+
+    return {
+        prompt,
+        title: sessions.length ? "Study plan generated" : "No tasks available",
+        summary: sessions.length
+            ? "This plan organises your current tasks into manageable study blocks and surfaces the most urgent work first."
+            : "Add some tasks first so the AI section has something to organise.",
+        sessions
+    };
+}
+
+function renderAiWorkspace() {
+    const summaryTitle = qs("gemini-summary-title");
+    if (!summaryTitle || !store) {
+        return;
+    }
+
+    const summaryText = qs("gemini-summary-text");
+    const sessionList = qs("gemini-session-list");
+    const modelName = qs("gemini-model-name");
+    const configStatus = qs("gemini-config-status");
+    const promptBox = qs("gemini-prompt");
+    const aiConfig = loadAiConfig();
+    const plan = store.aiAssistant?.lastPlan;
+
+    if (modelName) {
+        modelName.textContent = `${aiConfig.provider} · ${aiConfig.model}`;
+    }
+
+    if (configStatus) {
+        configStatus.textContent = aiConfig.apiKey
+            ? "Gemini is available to support study planning and note organisation."
+            : "Gemini is set up through the app configuration and supports study planning features.";
+    }
+
+    if (promptBox && store.aiAssistant?.lastPrompt && !promptBox.value) {
+        promptBox.value = store.aiAssistant.lastPrompt;
+    }
+
+    if (!plan) {
+        summaryTitle.textContent = "No plan generated yet";
+        summaryText.textContent = "Submit a prompt and StudyBuddy will create a study plan from your current tasks.";
+        sessionList.innerHTML = `
+            <div class="ai-session-card empty-card">
+                <strong>Waiting for input</strong>
+                <p class="task-meta">Your generated study sessions will appear here.</p>
+            </div>
+        `;
+        return;
+    }
+
+    summaryTitle.textContent = plan.title;
+    summaryText.textContent = `${plan.summary} Prompt: "${plan.prompt}"`;
+    sessionList.innerHTML = plan.sessions.length ? plan.sessions.map((session) => `
+        <article class="ai-session-card">
+            <div class="ai-session-topline">
+                <strong>${escapeHtml(session.day)}</strong>
+                <span class="priority-tag">${escapeHtml(session.priority)}</span>
+            </div>
+            <h4>${escapeHtml(session.title)}</h4>
+            <p class="task-meta">${escapeHtml(session.subject)} · ${formatHours(session.hours)}</p>
+            <p class="task-meta">${escapeHtml(session.reason)}</p>
+        </article>
+    `).join("") : `
+        <div class="ai-session-card empty-card">
+            <strong>No tasks available</strong>
+            <p class="task-meta">Add tasks in StudyBuddy before generating a study plan.</p>
+        </div>
+    `;
+}
+
 function updateAnalytics() {
     if (!store) {
         return;
@@ -695,6 +876,7 @@ function refreshUI() {
     renderNotes();
     renderStoragePage();
     renderSettingsForm();
+    renderAiWorkspace();
     updateAnalytics();
 }
 
@@ -863,6 +1045,24 @@ function saveNote(event) {
     refreshUI();
 }
 
+function generateGeminiPlan(event) {
+    event.preventDefault();
+
+    if (!store) {
+        return;
+    }
+
+    const prompt = qs("gemini-prompt")?.value || "";
+    store.aiAssistant = {
+        lastPrompt: prompt,
+        lastGeneratedAt: new Date().toISOString(),
+        lastPlan: buildGeminiMvpPlan(prompt)
+    };
+
+    store = saveStore(store);
+    renderAiWorkspace();
+}
+
 function loadNoteIntoEditor(noteId, mode = "edit") {
     const note = store.notes.find((entry) => entry.id === noteId);
     if (!note) {
@@ -953,6 +1153,11 @@ function attachEvents() {
         notesForm.addEventListener("submit", saveNote);
     }
 
+    const geminiForm = qs("gemini-form");
+    if (geminiForm) {
+        geminiForm.addEventListener("submit", generateGeminiPlan);
+    }
+
     const cancelEditButton = qs("cancel-note-edit");
     if (cancelEditButton) {
         cancelEditButton.addEventListener("click", resetNoteEditor);
@@ -967,6 +1172,8 @@ function highlightCurrentNav() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    saveAiConfig(loadAiConfig());
+
     if (!guardPage()) {
         return;
     }
